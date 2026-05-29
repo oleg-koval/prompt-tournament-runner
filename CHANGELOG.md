@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/oleg-koval/ai-refactor-playbook-runner/compare/v1.0.0...v1.0.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* disable release hooks in github actions ([f28cb64](https://github.com/oleg-koval/ai-refactor-playbook-runner/commit/f28cb64ca1752ea9b4a4908051f372c6e82bb170))
+
 # 1.0.0 (2026-05-29)
 
 
