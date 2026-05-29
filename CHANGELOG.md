@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/oleg-koval/ai-refactor-playbook-runner/compare/v1.0.1...v1.0.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* ignore generated changelog in prettier ([799586d](https://github.com/oleg-koval/ai-refactor-playbook-runner/commit/799586d93f1bd819cce38d9dd5348f70fcdc6618))
+
 ## [1.0.1](https://github.com/oleg-koval/ai-refactor-playbook-runner/compare/v1.0.0...v1.0.1) (2026-05-29)
 
 
