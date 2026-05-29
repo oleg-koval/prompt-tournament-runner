@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">AI Refactor Playbook Runner logo</title>
+  <desc id="desc">A playbook sheet with looping arrows to represent repeatable refactors.</desc>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="64" x2="416" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0b1220" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="accent" x1="140" y1="132" x2="372" y2="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#67e8f9" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <linearGradient id="loop" x1="146" y1="180" x2="372" y2="332" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <rect x="56" y="56" width="400" height="400" rx="88" fill="#0f172a" stroke="#1f2937" stroke-width="8" />
+  <rect x="138" y="110" width="236" height="292" rx="28" fill="#111827" stroke="#334155" stroke-width="8" />
+  <path d="M174 160h102" stroke="url(#accent)" stroke-width="18" stroke-linecap="round" />
+  <path d="M174 208h160" stroke="#475569" stroke-width="16" stroke-linecap="round" />
+  <path d="M174 250h132" stroke="#475569" stroke-width="16" stroke-linecap="round" />
+  <path d="M174 292h96" stroke="#475569" stroke-width="16" stroke-linecap="round" />
+  <path d="M174 334h118" stroke="#475569" stroke-width="16" stroke-linecap="round" />
+  <path d="M334 164c29 24 48 60 48 99 0 74-60 134-134 134-35 0-66-13-89-34" fill="none" stroke="url(#loop)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M330 120l72 8-28 66" fill="none" stroke="url(#loop)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M178 348l-72-8 28-66" fill="none" stroke="url(#loop)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M221 166l22 22 36-40" fill="none" stroke="#34d399" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

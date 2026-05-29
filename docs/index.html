@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Refactor Playbook Runner</title>
+    <meta
+      name="description"
+      content="Markdown-driven playbook runner for repeatable refactors with dry-run, resume, retries, and Tailscale-friendly local access."
+    />
+    <meta
+      name="keywords"
+      content="refactor, playbook, markdown, cli, typescript, tailscale, runner"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AI Refactor Playbook Runner" />
+    <meta
+      property="og:description"
+      content="Run repeatable markdown refactor playbooks with retries, dry-run, resume, and a mobile-friendly local UI."
+    />
+    <meta property="og:image" content="./social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Refactor Playbook Runner" />
+    <meta
+      name="twitter:description"
+      content="Markdown-driven refactors with dry-run, resume, retries, and Tailscale-friendly local access."
+    />
+    <meta name="twitter:image" content="./social-card.png" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #050816;
+        --panel: #0b1120;
+        --panel-2: #111827;
+        --line: #243244;
+        --text: #e5eefc;
+        --muted: #94a3b8;
+        --accent: #67e8f9;
+        --accent-2: #8b5cf6;
+        --good: #34d399;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: radial-gradient(circle at top, #0f1b3a 0%, var(--bg) 42%);
+        color: var(--text);
+        line-height: 1.5;
+      }
+      .shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 32px 20px 56px;
+      }
+      header,
+      section,
+      footer {
+        background: rgba(11, 17, 32, 0.88);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 24px 72px rgba(0, 0, 0, 0.28);
+      }
+      header {
+        padding: 28px;
+      }
+      section {
+        padding: 24px 28px;
+        margin-top: 18px;
+      }
+      footer {
+        margin-top: 18px;
+        padding: 20px 28px;
+        color: var(--muted);
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+      .brand {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 24px;
+        align-items: center;
+        margin-top: 18px;
+      }
+      .brand img {
+        display: block;
+        width: 120px;
+        height: 120px;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 4vw, 4rem);
+        line-height: 1.03;
+      }
+      .lede {
+        margin: 12px 0 0;
+        max-width: 62ch;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+      a.button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 999px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        border: 1px solid var(--line);
+        background: linear-gradient(
+          135deg,
+          rgba(103, 232, 249, 0.12),
+          rgba(139, 92, 246, 0.12)
+        );
+      }
+      .button.primary {
+        background: linear-gradient(
+          135deg,
+          rgba(103, 232, 249, 0.2),
+          rgba(139, 92, 246, 0.2)
+        );
+        border-color: rgba(103, 232, 249, 0.32);
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+      }
+      .card {
+        grid-column: span 6;
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px;
+      }
+      .card.full {
+        grid-column: 1 / -1;
+      }
+      h2 {
+        margin: 0 0 12px;
+        font-size: 1.15rem;
+      }
+      ul {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--muted);
+      }
+      code,
+      pre {
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.94rem;
+      }
+      pre {
+        margin: 0;
+        padding: 16px;
+        overflow: auto;
+        background: #07101f;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+      }
+      .kicker {
+        color: var(--good);
+        font-weight: 700;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .list-compact li + li {
+        margin-top: 8px;
+      }
+      @media (max-width: 780px) {
+        .brand {
+          grid-template-columns: 1fr;
+        }
+        .card {
+          grid-column: 1 / -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <span class="eyebrow">Markdown-first refactor runner</span>
+        <div class="brand">
+          <img src="./logo.svg" alt="AI Refactor Playbook Runner logo" />
+          <div>
+            <h1>AI Refactor Playbook Runner</h1>
+            <p class="lede">
+              Repeatable markdown refactors with inheritance, placeholder
+              expansion, retries, timeout reporting, dry-run, and resume. Built
+              for CLI use and a local browser UI you can open from mobile over
+              Tailscale.
+            </p>
+            <div class="cta-row">
+              <a
+                class="button primary"
+                href="https://github.com/oleg-koval/ai-refactor-playbook-runner#readme"
+                >Read the README</a
+              >
+              <a
+                class="button"
+                href="https://github.com/oleg-koval/ai-refactor-playbook-runner"
+                >GitHub repo</a
+              >
+              <a
+                class="button"
+                href="https://github.com/oleg-koval/ai-refactor-playbook-runner/releases"
+                >Releases</a
+              >
+              <a
+                class="button"
+                href="https://github.com/oleg-koval/ai-refactor-playbook-runner/issues"
+                >Issues</a
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <div class="grid">
+          <article class="card full">
+            <h2>Quick start</h2>
+            <pre><code>npm ci
+npm run build
+node dist/cli.js run examples/demo.md --dry-run
+node dist/cli.js serve --host 0.0.0.0 --port 8787</code></pre>
+            <p class="muted">
+              From mobile, open the server on your Tailscale IP or MagicDNS
+              hostname.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2>What it does</h2>
+            <ul class="list-compact">
+              <li>Parses reusable playbooks from markdown</li>
+              <li>Merges inherited templates without losing overrides</li>
+              <li>
+                Interpolates <code>{{placeholders}}</code> in steps and commands
+              </li>
+              <li>Runs sequentially with retries and per-step timeouts</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h2>Use it for</h2>
+            <ul class="list-compact">
+              <li>domain rename sweeps</li>
+              <li>cross-repo cleanup passes</li>
+              <li>repeatable convention rollouts</li>
+              <li>safe dry-run planning before the agent touches files</li>
+            </ul>
+          </article>
+
+          <article class="card full">
+            <h2>Example playbook shape</h2>
+            <pre><code># Refactor
+## Objective
+## Preconditions
+## Inherited Template
+## Variables
+## Steps
+## Validation
+## Rollback
+## Success Criteria
+## Kill Criteria</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        <div class="grid">
+          <div
+            class="card full"
+            style="
+              background: transparent;
+              border: 0;
+              padding: 0;
+              box-shadow: none;
+            "
+          >
+            <p>
+              <span class="kicker">Project status:</span> MVP, CLI-first,
+              published as an OSS package.
+            </p>
+            <p class="muted">
+              License: MIT. Maintainer: Oleg Koval. Support is issue-driven and
+              best-effort.
+            </p>
+            <p class="muted">
+              No donations configured. If you want funding links, add them
+              later.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

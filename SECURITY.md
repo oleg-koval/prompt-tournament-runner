@@ -1,21 +1,23 @@
 # Security Policy
 
-## Supported Versions
+## Supported versions
 
-| Version        | Supported           |
-| -------------- | ------------------- |
-| Latest minor   | Yes                 |
-| Previous minor | Security fixes only |
-| Older          | No                  |
+Only the latest `main` branch is actively maintained.
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-**Please do not open a public GitHub issue for security vulnerabilities.**
+Do not open a public issue for security-sensitive bugs.
 
-Email **oleg@bizcuit.nl** with:
+Send a private report to Oleg via GitHub or email and include:
 
-1. A description of the vulnerability and its potential impact
-2. Steps to reproduce or a proof-of-concept
-3. Any suggested fixes (optional but appreciated)
+- the affected command or file
+- the exact repro steps
+- the expected versus actual behavior
+- any proof of concept or logs
 
-You will receive an acknowledgement within 48 hours and a resolution timeline within 7 days.
+## What to include
+
+- package version or commit hash
+- operating system
+- Node.js version
+- whether the issue affects CLI or server mode

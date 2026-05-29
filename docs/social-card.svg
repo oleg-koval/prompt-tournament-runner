@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">AI Refactor Playbook Runner social card</title>
+  <desc id="desc">A dark terminal-style card for the markdown-driven refactor runner.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050816" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="glow" x1="120" y1="96" x2="600" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.32" />
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="accent" x1="70" y1="80" x2="440" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#67e8f9" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="48" fill="url(#bg)" />
+  <rect x="56" y="56" width="1088" height="518" rx="34" fill="#0b1120" stroke="#1f2937" stroke-width="2" />
+  <path d="M0 0h1200v630H0z" fill="url(#glow)" />
+  <g transform="translate(88 96)">
+    <rect width="132" height="132" rx="32" fill="#111827" stroke="#334155" stroke-width="4" />
+    <rect x="32" y="24" width="68" height="84" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="3" />
+    <path d="M47 49h38" stroke="url(#accent)" stroke-width="8" stroke-linecap="round" />
+    <path d="M47 69h50" stroke="#475569" stroke-width="7" stroke-linecap="round" />
+    <path d="M47 89h34" stroke="#475569" stroke-width="7" stroke-linecap="round" />
+    <path d="M77 37c11 9 17 23 17 38 0 29-24 53-53 53-13 0-25-5-35-13" fill="none" stroke="#34d399" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M77 20l31 4-12 29" fill="none" stroke="#34d399" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  <text x="256" y="170" fill="#e2e8f0" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="54" font-weight="800">AI Refactor Playbook Runner</text>
+  <text x="256" y="222" fill="#94a3b8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="26">Markdown-driven refactors with retries, dry-run, and resume.</text>
+  <g transform="translate(256 278)">
+    <rect width="274" height="66" rx="18" fill="#111827" stroke="#334155" stroke-width="2" />
+    <text x="24" y="42" fill="#67e8f9" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24">run playbook.md --dry-run</text>
+  </g>
+  <g transform="translate(256 374)" fill="#cbd5e1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="22">
+    <text x="0" y="0">• deterministic step order</text>
+    <text x="0" y="36">• placeholder interpolation</text>
+    <text x="0" y="72">• clean inheritance merge</text>
+  </g>
+  <g transform="translate(804 128)">
+    <rect width="312" height="354" rx="28" fill="#0f172a" stroke="#334155" stroke-width="2" />
+    <text x="28" y="42" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">$ npm run serve -- --host 0.0.0.0</text>
+    <text x="28" y="84" fill="#22c55e" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">ready on Tailscale</text>
+    <path d="M28 118h256" stroke="#1f2937" stroke-width="2" />
+    <text x="28" y="164" fill="#e2e8f0" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">$ run refactor</text>
+    <text x="28" y="196" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">step 1  parse playbook</text>
+    <text x="28" y="228" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">step 2  interpolate vars</text>
+    <text x="28" y="260" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">step 3  execute + retry</text>
+    <text x="28" y="292" fill="#94a3b8" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">step 4  resume on stop</text>
+    <path d="M28 316h256" stroke="#1f2937" stroke-width="2" />
+    <text x="28" y="342" fill="#67e8f9" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18">mobile-friendly local UI</text>
+  </g>
+</svg>

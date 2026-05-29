@@ -1,23 +1,13 @@
-## Summary
+## What changed
 
-<!-- What does this PR do? One paragraph. -->
+-
 
-## Type of change
+## Why
 
-- [ ] Bug fix (non-breaking change that fixes an issue)
-- [ ] New feature (non-breaking change that adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
-- [ ] Documentation update
-- [ ] Refactor / internal improvement
+-
 
-## Checklist
+## Verification
 
-- [ ] Tests added or updated
-- [ ] TypeScript types updated
-- [ ] README updated (if public API changed)
-- [ ] `npm run ci` passes locally
-- [ ] Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
-
-## Related issues
-
-<!-- Closes #123 -->
+- [ ] `npm run ci`
+- [ ] `npm run build`
+- [ ] Added or updated tests when behavior changed
