@@ -4,6 +4,7 @@ export default defineConfig({
   entry: {
     index: "src/index.ts",
     cli: "src/cli.ts",
+    "tournament-cli": "src/tournament-cli.ts",
   },
   format: ["esm"],
   dts: true,

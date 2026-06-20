@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { initPlaybook } from "./init.js";
 import { loadPlaybookFile } from "./load.js";
 import { startServer } from "./server.js";
 import { runPlaybook } from "./runner.js";
@@ -21,10 +22,11 @@ function parsePort(value: string | undefined, fallback: number): number {
 
 export function parseCliArgs(argv: string[]): CliArgs {
   const args = [...argv];
-  const command = (args[0] ?? "run") as "serve" | "run";
-  let host = "127.0.0.1";
+  const command = (args[0] ?? "run") as "serve" | "run" | "init";
+  let host = "0.0.0.0";
   let port = 8787;
   let playbookPath: string | undefined;
+  let initPath: string | undefined;
   let dryRun = false;
   let resume = false;
   let statePath: string | undefined;
@@ -33,6 +35,8 @@ export function parseCliArgs(argv: string[]): CliArgs {
 
   if (command === "run") {
     playbookPath = args[1];
+  } else if (command === "init") {
+    initPath = args[1];
   }
 
   for (let index = 1; index < args.length; index += 1) {
@@ -89,6 +93,9 @@ export function parseCliArgs(argv: string[]): CliArgs {
   if (playbookPath !== undefined) {
     parsed.playbookPath = playbookPath;
   }
+  if (initPath !== undefined) {
+    parsed.initPath = initPath;
+  }
   if (statePath !== undefined) {
     parsed.statePath = statePath;
   }
@@ -119,6 +126,22 @@ async function main(): Promise<void> {
     console.log(
       "Bind to 0.0.0.0 and use your Tailscale IP or MagicDNS name from mobile.",
     );
+    return;
+  }
+
+  if (args.command === "init") {
+    const initOptions: Parameters<typeof initPlaybook>[0] = {
+      workspaceRoot,
+    };
+
+    if (args.initPath !== undefined) {
+      initOptions.initPath = args.initPath;
+    }
+
+    const result = await initPlaybook(initOptions);
+
+    console.log(`Created starter playbook at ${result.path}`);
+    console.log("Edit it, then run it with `npm run playbook:run -- <path>`.");
     return;
   }
 

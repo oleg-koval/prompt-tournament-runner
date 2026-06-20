@@ -7,7 +7,7 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "lcov", "html"],
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/types.ts", "src/index.ts"],
+      exclude: ["src/types.ts", "src/tournament-types.ts", "src/index.ts"],
       thresholds: {
         lines: 75,
         functions: 88,

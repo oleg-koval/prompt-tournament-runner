@@ -1,7 +1,7 @@
 {
-  "name": "ai-refactor-playbook-runner",
+  "name": "prompt-tournament-runner",
   "version": "1.1.0",
-  "description": "Markdown-driven AI refactor playbook runner with CLI and local web UI",
+  "description": "Local prompt tournament runner for comparing prompt variants and ranking outputs",
   "type": "module",
   "sideEffects": false,
   "license": "MIT",
@@ -10,26 +10,26 @@
     "email": "oleg@bizcuit.nl",
     "url": "https://olegkoval.com"
   },
-  "homepage": "https://oleg-koval.github.io/ai-refactor-playbook-runner/",
+  "homepage": "https://oleg-koval.github.io/prompt-tournament-runner/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oleg-koval/ai-refactor-playbook-runner.git"
+    "url": "https://github.com/oleg-koval/prompt-tournament-runner.git"
   },
   "bugs": {
-    "url": "https://github.com/oleg-koval/ai-refactor-playbook-runner/issues"
+    "url": "https://github.com/oleg-koval/prompt-tournament-runner/issues"
   },
   "keywords": [
-    "playbook",
-    "refactor",
+    "prompt",
+    "evaluation",
     "typescript",
     "cli",
-    "markdown"
+    "local-web-app"
   ],
   "engines": {
     "node": ">=20.10.0"
   },
   "bin": {
-    "ai-refactor-playbook-runner": "./dist/cli.js"
+    "prompt-tournament-runner": "./dist/tournament-cli.js"
   },
   "exports": {
     ".": {
@@ -41,8 +41,7 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "CHANGELOG.md",
-    "examples"
+    "README.md"
   ],
   "devDependencies": {
     "@eslint/js": "^9.26.0",
@@ -64,6 +63,8 @@
   "scripts": {
     "build": "tsup",
     "build:docs": "typedoc --out docs/api src/index.ts",
+    "scaffold": "npm run build && node dist/tournament-cli.js --help",
+    "serve": "npm run build && node dist/tournament-cli.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src tests",
     "lint:fix": "eslint src tests --fix",

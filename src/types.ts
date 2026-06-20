@@ -99,10 +99,11 @@ export interface PlaybookState {
 }
 
 export interface CliArgs {
-  command: "serve" | "run";
+  command: "serve" | "run" | "init";
   host: string;
   port: number;
   playbookPath?: string;
+  initPath?: string;
   dryRun: boolean;
   resume: boolean;
   statePath?: string;
