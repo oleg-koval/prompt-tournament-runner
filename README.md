@@ -1,8 +1,16 @@
-# Prompt Tournament Runner
+<p align="center">
+  <img src="./logo.svg" width="110" height="110" alt="Prompt Tournament Runner logo">
+</p>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)](./tsconfig.json)
-[![Local-first](https://img.shields.io/badge/local--first-no%20cloud-success.svg)](#privacy)
+<h1 align="center">Prompt Tournament Runner</h1>
+
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="./tsconfig.json"><img src="https://img.shields.io/badge/TypeScript-strict-3178c6.svg" alt="TypeScript"></a>
+  <a href="#privacy"><img src="https://img.shields.io/badge/local--first-no%20cloud-success.svg" alt="Local-first"></a>
+</p>
+
+---
 
 Compare prompt variants head-to-head, score the outputs, and keep a record of which prompt actually won — all locally, no account, no API keys.
 
@@ -43,7 +51,7 @@ npm run serve -- --port 8790 --host 0.0.0.0 --root .
 
 ## Built with
 
-TypeScript (strict), a dependency-light Node HTTP server, and Vitest. 21 tests, typechecked, single-binary build via tsup.
+TypeScript (strict), a dependency-light Node HTTP server, and Vitest. 10 tests, typechecked, single-binary build via tsup.
 
 ## License
 
