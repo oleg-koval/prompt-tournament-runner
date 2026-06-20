@@ -5,6 +5,7 @@ import {
 } from "./tournament-html-fragments.js";
 import { summarizeRuns } from "./tournament-summary.js";
 import { tournamentDemos } from "./tournament-demo-data.js";
+import { renderClientScript } from "./tournament-client-script.js";
 
 export function renderHtml(runs: PromptTournamentRun[]): string {
   const summary = summarizeRuns(runs);
@@ -62,6 +63,10 @@ export function renderHtml(runs: PromptTournamentRun[]): string {
       .run-variant { border: 1px solid var(--line); border-radius: 16px; background: rgba(7, 12, 24, 0.8); padding: 14px; display: grid; gap: 10px; }
       pre { margin: 0; padding: 12px; overflow: auto; border-radius: 14px; border: 1px solid var(--line); background: #08101f; white-space: pre-wrap; word-break: break-word; }
       .status { margin-top: 12px; color: var(--muted); }
+      details.settings { padding: 0; margin-top: 16px; }
+      details.settings > summary { cursor: pointer; list-style: none; padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; }
+      details.settings > summary::-webkit-details-marker { display: none; }
+      .settings-body { padding: 0 20px 20px; display: grid; gap: 14px; }
       @media (max-width: 860px) { .meta, .task-grid, .variant-grid { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -77,6 +82,31 @@ export function renderHtml(runs: PromptTournamentRun[]): string {
           <div class="pill"><div class="pill-label">Latest update</div><div class="pill-value">${summary.latestUpdatedAt ?? "n/a"}</div></div>
         </div>
       </header>
+
+      <details class="settings" id="model-settings">
+        <summary><strong>Connect a model</strong> <span class="muted">optional &mdash; run variants with your Claude/Codex subscription or a local model</span></summary>
+        <div class="settings-body">
+          <div class="task-grid">
+            <div>
+              <label for="provider">Provider</label>
+              <select id="provider" name="provider">
+                <option value="claude">Claude (your subscription, via claude CLI)</option>
+                <option value="codex">ChatGPT / Codex (your subscription, via codex CLI)</option>
+                <option value="ollama">Local (Ollama, free)</option>
+              </select>
+            </div>
+            <div>
+              <label for="model">Model</label>
+              <input id="model" name="model" placeholder="claude-sonnet-4-6" />
+            </div>
+          </div>
+          <div class="actions">
+            <button class="primary" type="button" id="save-config">Save model settings</button>
+            <span class="muted" id="config-status"></span>
+          </div>
+          <p class="muted">No API keys are stored &mdash; auth lives in the CLIs you already sign into. Manual paste still works without any of this. (Running variants ships next.)</p>
+        </div>
+      </details>
 
       <section>
         <h2>Demo tournaments</h2>
@@ -117,151 +147,7 @@ export function renderHtml(runs: PromptTournamentRun[]): string {
       </section>
     </main>
 
-    <script>
-      const demos = ${JSON.stringify(tournamentDemos).replaceAll("<", "\\u003c")};
-      const statusNode = document.getElementById('status');
-      const form = document.getElementById('tournament-form');
-      const winnerSelect = document.getElementById('winnerVariantId');
-      const resetButton = document.getElementById('reset-form');
-      const variantIndexes = [1, 2, 3, 4, 5];
-
-      function byId(id) { return document.getElementById(id); }
-
-      function variantFields(index) {
-        return {
-          id: 'variant-' + String(index),
-          name: byId('variant-' + String(index) + '-name'),
-          prompt: byId('variant-' + String(index) + '-prompt'),
-          output: byId('variant-' + String(index) + '-output'),
-          score: byId('variant-' + String(index) + '-score'),
-          notes: byId('variant-' + String(index) + '-notes'),
-        };
-      }
-
-      function rebuildWinnerOptions() {
-        const options = variantIndexes.map((index) => {
-          const field = variantFields(index);
-          const name = field.name.value.trim() || 'Variant ' + String(index);
-          return '<option value="' + field.id + '">' + name + '</option>';
-        });
-        winnerSelect.innerHTML = options.join('');
-      }
-
-      function pickBestWinner() {
-        let winner = null;
-        for (const index of variantIndexes) {
-          const field = variantFields(index);
-          const name = field.name.value.trim();
-          const score = Number(field.score.value || '0');
-          if (name.length === 0) {
-            continue;
-          }
-          if (winner === null || score > winner.score) {
-            winner = { id: field.id, score };
-          }
-        }
-        if (winner !== null) {
-          winnerSelect.value = winner.id;
-        }
-      }
-
-      function fillDemo(demoId) {
-        const demo = demos.find((item) => item.id === demoId);
-        if (demo === undefined) {
-          return;
-        }
-
-        byId('task').value = demo.task;
-        byId('context').value = demo.context;
-        variantIndexes.forEach((index) => {
-          const source = demo.variants[index - 1];
-          const field = variantFields(index);
-          if (source === undefined) {
-            field.name.value = '';
-            field.prompt.value = '';
-            field.output.value = '';
-            field.score.value = '3';
-            field.notes.value = '';
-            return;
-          }
-          field.name.value = source.name;
-          field.prompt.value = source.prompt;
-          field.output.value = source.output;
-          field.score.value = String(source.score);
-          field.notes.value = source.notes;
-        });
-        rebuildWinnerOptions();
-        pickBestWinner();
-        statusNode.textContent = 'Loaded demo: ' + demo.label + '.';
-      }
-
-      document.querySelectorAll('[data-demo-id]').forEach((button) => {
-        button.addEventListener('click', () => {
-          fillDemo(button.getAttribute('data-demo-id'));
-        });
-      });
-
-      variantIndexes.forEach((index) => {
-        const field = variantFields(index);
-        ['input', 'change'].forEach((eventName) => {
-          field.name.addEventListener(eventName, () => {
-            rebuildWinnerOptions();
-            pickBestWinner();
-          });
-          field.score.addEventListener(eventName, pickBestWinner);
-        });
-      });
-
-      winnerSelect.addEventListener('change', () => {
-        statusNode.textContent = 'Winner set to ' + winnerSelect.value + '.';
-      });
-
-      resetButton.addEventListener('click', () => {
-        form.reset();
-        rebuildWinnerOptions();
-        pickBestWinner();
-        statusNode.textContent = 'Form cleared.';
-      });
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const payload = {
-          task: byId('task').value,
-          context: byId('context').value,
-          winnerVariantId: winnerSelect.value,
-          variants: variantIndexes.map((index) => {
-            const field = variantFields(index);
-            return {
-              id: field.id,
-              name: field.name.value,
-              prompt: field.prompt.value,
-              output: field.output.value,
-              score: Number(field.score.value || '0'),
-              notes: field.notes.value,
-            };
-          }),
-        };
-
-        statusNode.textContent = 'Saving...';
-        const response = await fetch('/api/runs', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-
-        if (!response.ok) {
-          const body = await response.text();
-          statusNode.textContent = 'Save failed: ' + body;
-          return;
-        }
-
-        statusNode.textContent = 'Saved. Reloading...';
-        window.location.reload();
-      });
-
-      rebuildWinnerOptions();
-      pickBestWinner();
-    </script>
+    <script>${renderClientScript()}</script>
   </body>
 </html>`;
 }

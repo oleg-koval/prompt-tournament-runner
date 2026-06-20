@@ -1,3 +1,10 @@
+export type ModelProvider = "claude" | "codex" | "ollama";
+
+export interface ModelConfig {
+  provider: ModelProvider;
+  model: string;
+}
+
 export interface PromptVariant {
   id: string;
   name: string;

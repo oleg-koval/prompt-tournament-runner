@@ -11,6 +11,13 @@ export {
   summarizeRuns,
   nonEmptyVariants,
 } from "./tournament-summary.js";
+export {
+  getConfigPath,
+  getModelConfig,
+  setModelConfig,
+  normalizeModelConfig,
+} from "./model-config-store.js";
+export type { ModelConfig, ModelProvider } from "./tournament-types.js";
 export type {
   PromptTournamentRun,
   PromptTournamentRunInput,

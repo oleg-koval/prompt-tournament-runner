@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import type { IncomingMessage } from "node:http";
 import { createRunId, listRuns, saveRun } from "./tournament-store.js";
+import { getModelConfig, setModelConfig } from "./model-config-store.js";
 import { renderHtml } from "./tournament-html.js";
 import type {
   PromptTournamentRun,
@@ -120,6 +121,33 @@ export async function startTournamentServer(
     if (request.url === "/health") {
       response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
       response.end("ok");
+      return;
+    }
+
+    if (request.url === "/api/config" && request.method === "GET") {
+      const config = await getModelConfig(options.workspaceRoot);
+      response.writeHead(200, {
+        "content-type": "application/json; charset=utf-8",
+      });
+      response.end(JSON.stringify(config, null, 2));
+      return;
+    }
+
+    if (request.url === "/api/config" && request.method === "POST") {
+      try {
+        const body = await readJsonBody(request);
+        const config = await setModelConfig(options.workspaceRoot, body);
+        response.writeHead(200, {
+          "content-type": "application/json; charset=utf-8",
+        });
+        response.end(JSON.stringify(config, null, 2));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        response.writeHead(400, {
+          "content-type": "text/plain; charset=utf-8",
+        });
+        response.end(message);
+      }
       return;
     }
 

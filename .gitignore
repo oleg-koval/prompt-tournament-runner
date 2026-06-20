@@ -9,3 +9,6 @@ docs/api/
 
 # local tournament data
 .prompt-tournament-runs.json
+
+# local model-connection config (no secrets, but machine-specific)
+.prompt-tournament-config.json
