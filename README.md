@@ -16,6 +16,10 @@ Compare prompt variants head-to-head, score the outputs, and keep a record of wh
 
 > You rewrote the prompt five times and _think_ the third one was best. Prove it. Run a tournament, score the outputs side by side, and save the result so you never re-litigate the same prompt again.
 
+<p align="center">
+  <img src="./docs/screenshot.png" width="820" alt="Prompt Tournament Runner comparing three scored prompt variants, with the Reassuring variant winning at 5/5">
+</p>
+
 ## Why
 
 Prompt iteration is usually vibes: you tweak wording, eyeball the output, and forget what you tried. This is a tiny, local scoreboard for that loop — structured comparison instead of guesswork, with a saved history you can look back on.
