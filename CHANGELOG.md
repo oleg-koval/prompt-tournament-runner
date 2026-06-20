@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/oleg-koval/prompt-tournament-runner/compare/v1.0.0...v1.1.0) (2026-06-20)
+
+
+### Features
+
+* model-connection settings (step 1 of subscription mode) ([2fde87e](https://github.com/oleg-koval/prompt-tournament-runner/commit/2fde87eff5ceed3c84b8929340077551de0fda60))
+
 # 1.0.0 (2026-06-20)
 
 
