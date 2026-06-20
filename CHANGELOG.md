@@ -1,3 +1,21 @@
+# 1.0.0 (2026-06-20)
+
+
+### Bug Fixes
+
+* disable release commit hooks in ci ([692de5d](https://github.com/oleg-koval/prompt-tournament-runner/commit/692de5d1fc8a6dc37f7dd9921dd18802b5c98dd0))
+* disable release hooks in github actions ([f28cb64](https://github.com/oleg-koval/prompt-tournament-runner/commit/f28cb64ca1752ea9b4a4908051f372c6e82bb170))
+* ignore generated changelog in prettier ([799586d](https://github.com/oleg-koval/prompt-tournament-runner/commit/799586d93f1bd819cce38d9dd5348f70fcdc6618))
+* skip npm publish in release workflow ([32f9653](https://github.com/oleg-koval/prompt-tournament-runner/commit/32f9653ada672cd0945cf9839360136b19107abe))
+
+
+### Features
+
+* prompt tournament — local scoring UI, store, CLI, and tests ([4956630](https://github.com/oleg-koval/prompt-tournament-runner/commit/49566305e709c4b3b0591eb6583143abd1f951e7))
+* publish playbook runner docs ([77405dc](https://github.com/oleg-koval/prompt-tournament-runner/commit/77405dcb7665f336af6cb6e3f0bae5d4797db36d))
+* regenerate readme icon ([f4897fe](https://github.com/oleg-koval/prompt-tournament-runner/commit/f4897fe7b57ef07feada777fb43c8be82a6f8e9b))
+* release ai refactor playbook runner ([8e63675](https://github.com/oleg-koval/prompt-tournament-runner/commit/8e63675f7822a44784cdc18c70a7f1f16f6e375d))
+
 # [1.1.0](https://github.com/oleg-koval/ai-refactor-playbook-runner/compare/v1.0.2...v1.1.0) (2026-05-29)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "prompt-tournament-runner",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "Local prompt tournament runner for comparing prompt variants and ranking outputs",
   "type": "module",
   "sideEffects": false,
